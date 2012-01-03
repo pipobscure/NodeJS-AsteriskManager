@@ -138,7 +138,7 @@ var Manager = function(port, host) {
 						}
 					} else if (item.event) {
 						item.event = String(item.event).toLowerCase();
-						that.emit('magaerevent', item);
+						that.emit('managerevent', item);
 						that.emit(item.event, item);
 					}
 				}

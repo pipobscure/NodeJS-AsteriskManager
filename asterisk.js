@@ -116,8 +116,8 @@ var Manager = function(port, host) {
 				} else {
 					var item = {};
 					while (lines.length) {
-						line = lines.shift().split(/\s*:\s*/,2);
-						item[line[0].toLowerCase()] = line[1];
+						line = lines.shift().split(/\s*:\s*/);
+						item[line.shift().toLowerCase()] = line.join(':');
 					}
 					if (item.response && item.actionid) {
 						if (commands[item.actionid]) {

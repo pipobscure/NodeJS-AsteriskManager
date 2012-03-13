@@ -222,9 +222,9 @@ var Manager = function(port, host) {
 	var funcblock = {};
 	var datablock = {};
 	var timeoutProtect = {};
-	this.sendcommand = function(request, EOR, callback) {
+	this.sendcommand = function(request, callback) {
 		if (!connection || !connection.readyState==='open') {
-			if ("function" === typeof callback) callback.call(false, new Error("Not Connected"));
+			if ("function" === typeof callback) callback.call(new Error("Not Connected"), null);
 			return;
 		}
 		
@@ -232,12 +232,9 @@ var Manager = function(port, host) {
 		this.action(request, function(err, val) {
 			if (err || !val) {
 				that.emit('error', err);
-				if ("function" === typeof callback) callback.call(true, err);
+				if ("function" === typeof callback) callback.call(err, null);
 			} else {
-				funcblock[val.response.actionid] = {
-					"callback":callback,
-					"EOR":EOR
-				};
+				funcblock[val.response.actionid] = callback;
 				datablock[val.response.actionid] = [];
 				//that.emit('result', val);
 				// Setup the timeout handler
@@ -246,7 +243,7 @@ var Manager = function(port, host) {
 				  // Clear the local timer variable, indicating the timeout has been triggered.
 				  timeoutProtect[val.response.actionid] = null;
 				  // Execute the callback with an error argument.
-				  funcblock[val.response.actionid].callback(true, 'async timed out');
+				  funcblock[val.response.actionid]('async timed out', null);
 				  //callback({error:'async timed out'});
 			
 				}, 1000);
@@ -256,13 +253,14 @@ var Manager = function(port, host) {
 	this.on('managerevent', function(evt){
 		//console.log(evt);
 		if(evt && datablock[evt.actionid]){
+			var EOR = ['queuestatuscomplete','queuesummarycomplete','dahdishowchannelscomplete','peerlistcomplete','dbgetresponse']
 			datablock[evt.actionid].push(evt);
-			if(evt.event == funcblock[evt.actionid].EOR){
+			if(EOR.indexOf(evt.event) > -1  /*evt.event == funcblock[evt.actionid].EOR*/){
 				if (timeoutProtect[evt.actionid]){ 
 				    // Clear the scheduled timeout handler
 				    clearTimeout(timeoutProtect[evt.actionid]);
 				    
-					funcblock[evt.actionid].callback(false, datablock[evt.actionid]);
+					funcblock[evt.actionid](null, datablock[evt.actionid]);
 				}
 			}
 		}

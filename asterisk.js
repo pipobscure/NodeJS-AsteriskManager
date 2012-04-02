@@ -237,7 +237,7 @@ var Manager = function(port, host) {
 				funcblock[val.response.actionid] = callback;
 				datablock[val.response.actionid] = [];
 				//that.emit('result', val);
-				if((val.response.response == "Success")&&(val.response.message.indexOf("will follow") < 0)){
+				if((val.response.response == "Success") && val.response.message && (val.response.message.indexOf("will follow") < 0)){
 					datablock[val.response.actionid].push(val.response);
 					funcblock[val.response.actionid](null, datablock[val.response.actionid]);
 				}else{

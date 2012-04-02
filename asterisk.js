@@ -233,20 +233,25 @@ var Manager = function(port, host) {
 			if (err || !val) {
 				that.emit('error', err);
 				if ("function" === typeof callback) callback.call(err, null);
-			} else {
+			} else {//console.log("in send command");console.log(val);
 				funcblock[val.response.actionid] = callback;
 				datablock[val.response.actionid] = [];
 				//that.emit('result', val);
-				// Setup the timeout handler
-				timeoutProtect[val.response.actionid] = null;
-				timeoutProtect[val.response.actionid] = setTimeout(function() {
-				  // Clear the local timer variable, indicating the timeout has been triggered.
-				  timeoutProtect[val.response.actionid] = null;
-				  // Execute the callback with an error argument.
-				  funcblock[val.response.actionid]('async timed out', null);
-				  //callback({error:'async timed out'});
-			
-				}, 1000);
+				if((val.response.response == "Success")&&(val.response.message.indexOf("will follow") < 0)){
+					datablock[val.response.actionid].push(val.response);
+					funcblock[val.response.actionid](null, datablock[val.response.actionid]);
+				}else{
+					// Setup the timeout handler
+					timeoutProtect[val.response.actionid] = null;
+					timeoutProtect[val.response.actionid] = setTimeout(function() {
+					  // Clear the local timer variable, indicating the timeout has been triggered.
+					  timeoutProtect[val.response.actionid] = null;
+					  // Execute the callback with an error argument.
+					  funcblock[val.response.actionid]('async timed out', null);
+					  //callback({error:'async timed out'});
+				
+					}, 1000);
+				}
 			}
 		});
 	};

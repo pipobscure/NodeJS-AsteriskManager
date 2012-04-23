@@ -93,6 +93,10 @@ var Manager = function(port, host) {
 	var authenticated = false;
 	this.__defineGetter__('authenticated', function() { return authenticated; });
 
+	this.isConnected = function(){
+		return connection ? true : false;
+    	};
+
 	var credentials = {};
 	this.connect = function(username, password, reconn) {
 		credentials.username = username || credentials.username;

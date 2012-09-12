@@ -6,7 +6,7 @@
  * © See LICENSE file
  *
  */
-var microtime = require('microtime')
+var microtime = require('microtime');
 var net = require('net');
 var EventEmitter = require('events').EventEmitter;
 var readline = (function() {

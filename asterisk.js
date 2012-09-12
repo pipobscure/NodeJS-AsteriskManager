@@ -2,8 +2,8 @@
  * NodeJS Asterisk Manager API
  * (Based on https://github.com/mscdex/node-asterisk.git)
  * But radically altered thereafter so as to constitute a new work.
- * 
- * © 2011 by Philipp Dunkel
+ *
+ * © See LICENSE file
  *
  */
 var microtime = require('microtime')
@@ -231,7 +231,7 @@ var Manager = function(port, host) {
 			if ("function" === typeof callback) callback.call(new Error("Not Connected"), null);
 			return;
 		}
-		
+
 		var that = this;
 		this.action(request, function(err, val) {
 			if (err || !val) {
@@ -253,7 +253,7 @@ var Manager = function(port, host) {
 					  // Execute the callback with an error argument.
 					  funcblock[val.response.actionid]('async timed out', null);
 					  //callback({error:'async timed out'});
-				
+
 					}, 1000);
 				}
 			}
@@ -265,10 +265,10 @@ var Manager = function(port, host) {
 			var EOR = ['queuestatuscomplete','queuesummarycomplete','dahdishowchannelscomplete','peerlistcomplete','dbgetresponse']
 			datablock[evt.actionid].push(evt);
 			if(EOR.indexOf(evt.event) > -1  /*evt.event == funcblock[evt.actionid].EOR*/){
-				if (timeoutProtect[evt.actionid]){ 
+				if (timeoutProtect[evt.actionid]){
 				    // Clear the scheduled timeout handler
 				    clearTimeout(timeoutProtect[evt.actionid]);
-				    
+
 					funcblock[evt.actionid](null, datablock[evt.actionid]);
 				}
 			}

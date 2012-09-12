@@ -7,11 +7,11 @@ So this is basically a different piece of work, but since there is a shared DNA 
 ## API Overview
 
 	var manager = new (require('asterisk'))(5038, 'localhost');
-	
+
 	manager.on('connect', function(err, val) {
 		manager.authenticate('username', 'password');
 	});
-	
+
 	manager.on('close', function() {});
 	manager.on('error', function(err) {});
 	manager.on('managerevent', function(evt) {});
@@ -21,7 +21,7 @@ So this is basically a different piece of work, but since there is a shared DNA 
 	Possible parameters to connect() are username, password, and a boolean indicating whether the connection should be reconnected if it fails.
 	All parameters are optional and are only used for reconnection not for the first authentication!
 	*/
-	
+
 	manager.action({
 		'action':'originate',
 		'channel':'SIP/myphone',
@@ -33,19 +33,19 @@ So this is basically a different piece of work, but since there is a shared DNA 
 			'name2':'value2'
 		}
 	}, function(err, res) {});
-	
-	
+
+
 	/*
 	You should use sendcommand(options, callback) to send a command to asterisk and recieve a response from asterisk in the callback.
-	The options parameter is the same as what you would pass to action. 
+	The options parameter is the same as what you would pass to action.
 	*/
-	
+
 	manager.sendcommand({
 	    'action':'queuesummary'
 	}, function(err, res) {
 		console.log(res);
 	});
-	
+
 	/*
 	The following is an example response from sendcommand().
 	*/
@@ -69,9 +69,47 @@ So this is basically a different piece of work, but since there is a shared DNA 
 	    actionid: '1331637239672302' },
   	{ event: 'queuesummarycomplete',
     	actionid: '1331637239672302' } ]
-	
+
 	/*
 		Variables are automatically put in the right format. Aside from that everything is passed straight through to Asterisk. See Manager API documentation for what is possible.
 	*/
-	
+
 	manager.disconnect();
+
+## Contributors
+
+ * [Philipp Dunkel](https://github.com/phidelta)
+ * [Tekay](https://github.com/Tekay)
+ * [abroweb](https://github.com/abroweb)
+ * [Kofi Hagan](https://github.com/kofibentum)
+
+## License
+
+MIT License
+-----------
+
+Copyright (C) 2012 by
+  Philipp Dunkel <https://github.com/phidelta>
+  Tekay <https://github.com/Tekay>
+  abroweb <https://github.com/abroweb>
+  Kofi Hagan <https://github.com/kofibentum>
+
+Based on a work Copyright (C) 2010 Brian White <mscdex@gmail.com>, but radically altered thereafter so as to constitute a new work.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

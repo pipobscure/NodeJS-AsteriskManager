@@ -33,6 +33,43 @@ So this is basically a different piece of work, but since there is a shared DNA 
 			'name2':'value2'
 		}
 	}, function(err, res) {});
+	
+	
+	/*
+	You should use sendcommand(options, callback) to send a command to asterisk and recieve a response from asterisk in the callback.
+	The options parameter is the same as what you would pass to action. 
+	*/
+	
+	manager.sendcommand({
+	    'action':'queuesummary'
+	}, function(err, res) {
+		console.log(res);
+	});
+	
+	/*
+	The following is an example response from sendcommand().
+	*/
+	[ { event: 'queuesummary',
+	    queue: '12345',
+	    loggedin: '1',
+	    available: '1',
+	    callers: '0',
+	    holdtime: '0',
+	    talktime: '0',
+	    longestholdtime: '0',
+	    actionid: '1331637239672302' },
+    { event: 'queuesummary',
+	    queue: '67890',
+	    loggedin: '1',
+	    available: '1',
+	    callers: '0',
+	    holdtime: '0',
+	    talktime: '0',
+	    longestholdtime: '0',
+	    actionid: '1331637239672302' },
+  	{ event: 'queuesummarycomplete',
+    	actionid: '1331637239672302' } ]
+	
 	/*
 		Variables are automatically put in the right format. Aside from that everything is passed straight through to Asterisk. See Manager API documentation for what is possible.
 	*/

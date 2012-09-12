@@ -6,7 +6,7 @@
  * © 2011 by Philipp Dunkel
  *
  */
-
+var microtime = require('microtime')
 var net = require('net');
 var EventEmitter = require('events').EventEmitter;
 var readline = (function() {
@@ -164,7 +164,7 @@ var Manager = function(port, host) {
 			if ("function" === typeof callback) callback.call(this, new Error('Not Connected'), undefined);
 			return undefined;
 		}
-		var actionid = (new Date()).getTime();
+		var actionid = microtime.now();//(new Date()).getTime();//change this to microseconds
 		if ("object" === typeof request.variable) {
 			request.variable = makeVars(request.variable);
 		}
@@ -222,6 +222,57 @@ var Manager = function(port, host) {
 	});
 	this.on('connect', function() {
 		if (credentials.username) this.authenticate(credentials.username, credentials.password);
+	});
+	var funcblock = {};
+	var datablock = {};
+	var timeoutProtect = {};
+	this.sendcommand = function(request, callback) {
+		if (!connection || !connection.readyState==='open') {
+			if ("function" === typeof callback) callback.call(new Error("Not Connected"), null);
+			return;
+		}
+		
+		var that = this;
+		this.action(request, function(err, val) {
+			if (err || !val) {
+				that.emit('error', err);
+				if ("function" === typeof callback) callback.call(err, null);
+			} else {//console.log("in send command");console.log(val);
+				funcblock[val.response.actionid] = callback;
+				datablock[val.response.actionid] = [];
+				//that.emit('result', val);
+				if((val.response.response == "Success") && val.response.message && (val.response.message.indexOf("will follow") < 0)){
+					datablock[val.response.actionid].push(val.response);
+					funcblock[val.response.actionid](null, datablock[val.response.actionid]);
+				}else{
+					// Setup the timeout handler
+					timeoutProtect[val.response.actionid] = null;
+					timeoutProtect[val.response.actionid] = setTimeout(function() {
+					  // Clear the local timer variable, indicating the timeout has been triggered.
+					  timeoutProtect[val.response.actionid] = null;
+					  // Execute the callback with an error argument.
+					  funcblock[val.response.actionid]('async timed out', null);
+					  //callback({error:'async timed out'});
+				
+					}, 1000);
+				}
+			}
+		});
+	};
+	this.on('managerevent', function(evt){
+		//console.log(evt);
+		if(evt && datablock[evt.actionid]){
+			var EOR = ['queuestatuscomplete','queuesummarycomplete','dahdishowchannelscomplete','peerlistcomplete','dbgetresponse']
+			datablock[evt.actionid].push(evt);
+			if(EOR.indexOf(evt.event) > -1  /*evt.event == funcblock[evt.actionid].EOR*/){
+				if (timeoutProtect[evt.actionid]){ 
+				    // Clear the scheduled timeout handler
+				    clearTimeout(timeoutProtect[evt.actionid]);
+				    
+					funcblock[evt.actionid](null, datablock[evt.actionid]);
+				}
+			}
+		}
 	});
 };
 require('util').inherits(Manager, EventEmitter);

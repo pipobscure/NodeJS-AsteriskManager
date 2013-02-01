@@ -6,7 +6,7 @@
  * © See LICENSE file
  *
  */
-var microtime = require('microtime');
+
 var net = require('net');
 var EventEmitter = require('events').EventEmitter;
 var readline = (function() {
@@ -164,7 +164,7 @@ var Manager = function(port, host) {
 			if ("function" === typeof callback) callback.call(this, new Error('Not Connected'), undefined);
 			return undefined;
 		}
-		var actionid = request.actionid || microtime.now();
+		var actionid = request.actionid || now();
 		if ("object" === typeof request.variable) {
 			request.variable = makeVars(request.variable);
 		}
@@ -261,7 +261,6 @@ var Manager = function(port, host) {
 	};
 	this.on('managerevent', function(evt){
 		//console.log(evt);
-		if(evt && datablock[evt.actionid]){
 			var EOR = ['queuestatuscomplete','queuesummarycomplete','dahdishowchannelscomplete','peerlistcomplete','dbgetresponse']
 			datablock[evt.actionid].push(evt);
 			if(EOR.indexOf(evt.event) > -1  /*evt.event == funcblock[evt.actionid].EOR*/){
@@ -278,3 +277,8 @@ var Manager = function(port, host) {
 require('util').inherits(Manager, EventEmitter);
 
 module.exports = Manager;
+
+function now() {
+  var diff = process.hrtime();
+  return (diff[0] * 1e9) + diff[1];
+}

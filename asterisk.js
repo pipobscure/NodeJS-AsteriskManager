@@ -120,8 +120,8 @@ var Manager = function(port, host) {
 				} else {
 					var item = {};
 					while (lines.length) {
-						line = lines.shift().split(/\s*:\s*/);
-						item[line.shift().toLowerCase()] = line.join(':');
+						line = lines.shift().split(/\s*[:=]\s*/);
+						item[line.shift().toLowerCase().trim()] = line.join(':');
 					}
 					if (item.response && item.actionid) {
 						if (commands[item.actionid]) {
@@ -164,7 +164,7 @@ var Manager = function(port, host) {
 			if ("function" === typeof callback) callback.call(this, new Error('Not Connected'), undefined);
 			return undefined;
 		}
-		var actionid = microtime.now();//(new Date()).getTime();//change this to microseconds
+		var actionid = request.actionid || microtime.now();
 		if ("object" === typeof request.variable) {
 			request.variable = makeVars(request.variable);
 		}
@@ -278,4 +278,3 @@ var Manager = function(port, host) {
 require('util').inherits(Manager, EventEmitter);
 
 module.exports = Manager;
-

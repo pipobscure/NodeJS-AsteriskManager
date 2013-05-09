@@ -261,15 +261,14 @@ var Manager = function(port, host) {
 	};
 	this.on('managerevent', function(evt){
 		//console.log(evt);
-			var EOR = ['queuestatuscomplete','queuesummarycomplete','dahdishowchannelscomplete','peerlistcomplete','dbgetresponse']
-			datablock[evt.actionid].push(evt);
-			if(EOR.indexOf(evt.event) > -1  /*evt.event == funcblock[evt.actionid].EOR*/){
-				if (timeoutProtect[evt.actionid]){
-				    // Clear the scheduled timeout handler
-				    clearTimeout(timeoutProtect[evt.actionid]);
+		var EOR = ['queuestatuscomplete','queuesummarycomplete','dahdishowchannelscomplete','peerlistcomplete','dbgetresponse']
+		datablock[evt.actionid].push(evt);
+		if(EOR.indexOf(evt.event) > -1  /*evt.event == funcblock[evt.actionid].EOR*/){
+			if (timeoutProtect[evt.actionid]){
+			    // Clear the scheduled timeout handler
+			    clearTimeout(timeoutProtect[evt.actionid]);
 
-					funcblock[evt.actionid](null, datablock[evt.actionid]);
-				}
+				funcblock[evt.actionid](null, datablock[evt.actionid]);
 			}
 		}
 	});

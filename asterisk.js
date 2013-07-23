@@ -262,6 +262,7 @@ var Manager = function(port, host) {
 	this.on('managerevent', function(evt){
 		//console.log(evt);
 		var EOR = ['queuestatuscomplete','queuesummarycomplete','dahdishowchannelscomplete','peerlistcomplete','dbgetresponse']
+		datablock[evt.actionid] = [];
 		datablock[evt.actionid].push(evt);
 		if(EOR.indexOf(evt.event) > -1  /*evt.event == funcblock[evt.actionid].EOR*/){
 			if (timeoutProtect[evt.actionid]){

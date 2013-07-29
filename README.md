@@ -4,25 +4,30 @@ For a project of mine I needed a low level interface to the Asterisk Manager API
 
 So this is basically a different piece of work, but since there is a shared DNA and I got a good start by depending on Brian's work, I feel like giving credit is appropriate.
 
-## API Overview
+## Install
 
-	var manager = new (require('asterisk'))(5038, 'localhost');
+        $ npm install asterisk-manager
 
-	manager.on('connect', function(err, val) {
-		manager.authenticate('username', 'password');
-	});
+## Usage
 
-	manager.on('close', function() {});
-	manager.on('error', function(err) {});
-	manager.on('managerevent', function(evt) {});
-	manager.on('response', function(res) { /* This is done because we can, not because it is needed! */});
-	manager.connect();
-	/*
-	Possible parameters to connect() are username, password, and a boolean indicating whether the connection should be reconnected if it fails.
-	All parameters are optional and are only used for reconnection not for the first authentication!
-	*/
+        var ami = new (require('asterisk-manager')(
+                'port',
+                'host',
+                'username',
+                'password',
+                true); // This parameter determines whether events are emited.
 
-	manager.action({
+        // Listen for any/all AMI events.
+        manager.on('managerevent', function(evt) {});
+
+        // Listen for specific AMI events. A list of event names can be found at
+        // https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+AMI+Events
+        manager.on('hangup', function(evt) {});
+        manager.on('confbridgejoin', function(evt) {});
+
+        // Perform an AMI Action. A list of actions can be found at
+        // https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+AMI+Actions
+        ami.action({
 		'action':'originate',
 		'channel':'SIP/myphone',
 		'context':'default',
@@ -33,48 +38,6 @@ So this is basically a different piece of work, but since there is a shared DNA 
 			'name2':'value2'
 		}
 	}, function(err, res) {});
-
-
-	/*
-	You should use sendcommand(options, callback) to send a command to asterisk and recieve a response from asterisk in the callback.
-	The options parameter is the same as what you would pass to action.
-	*/
-
-	manager.sendcommand({
-	    'action':'queuesummary'
-	}, function(err, res) {
-		console.log(res);
-	});
-
-	/*
-	The following is an example response from sendcommand().
-	*/
-	[ { event: 'queuesummary',
-	    queue: '12345',
-	    loggedin: '1',
-	    available: '1',
-	    callers: '0',
-	    holdtime: '0',
-	    talktime: '0',
-	    longestholdtime: '0',
-	    actionid: '1331637239672302' },
-    { event: 'queuesummary',
-	    queue: '67890',
-	    loggedin: '1',
-	    available: '1',
-	    callers: '0',
-	    holdtime: '0',
-	    talktime: '0',
-	    longestholdtime: '0',
-	    actionid: '1331637239672302' },
-  	{ event: 'queuesummarycomplete',
-    	actionid: '1331637239672302' } ]
-
-	/*
-		Variables are automatically put in the right format. Aside from that everything is passed straight through to Asterisk. See Manager API documentation for what is possible.
-	*/
-
-	manager.disconnect();
 
 ## Contributors
 

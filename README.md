@@ -18,12 +18,12 @@ So this is basically a different piece of work, but since there is a shared DNA 
                 true); // This parameter determines whether events are emited.
 
         // Listen for any/all AMI events.
-        manager.on('managerevent', function(evt) {});
+        ami.on('managerevent', function(evt) {});
 
         // Listen for specific AMI events. A list of event names can be found at
         // https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+AMI+Events
-        manager.on('hangup', function(evt) {});
-        manager.on('confbridgejoin', function(evt) {});
+        ami.on('hangup', function(evt) {});
+        ami.on('confbridgejoin', function(evt) {});
 
         // Perform an AMI Action. A list of actions can be found at
         // https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+AMI+Actions

@@ -31,7 +31,7 @@ So this is basically a different piece of work, but since there is a shared DNA 
 		'action':'originate',
 		'channel':'SIP/myphone',
 		'context':'default',
-		'extension':1234,
+		'exten':1234,
 		'priority':1,
 		'variables':{
 			'name1':'value1',

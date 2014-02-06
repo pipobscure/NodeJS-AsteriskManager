@@ -10,7 +10,7 @@ So this is basically a different piece of work, but since there is a shared DNA 
 
 ## Usage
 
-        var ami = new (require('asterisk-manager')(
+        var ami = new require('asterisk-manager')(
                 'port',
                 'host',
                 'username',

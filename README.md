@@ -10,7 +10,7 @@ So this is basically a different piece of work, but since there is a shared DNA 
 
 ## Usage
 
-        var ami = new (require('asterisk-manager')(
+        var ami = new require('asterisk-manager')(
                 'port',
                 'host',
                 'username',
@@ -31,7 +31,7 @@ So this is basically a different piece of work, but since there is a shared DNA 
 		'action':'originate',
 		'channel':'SIP/myphone',
 		'context':'default',
-		'extension':1234,
+		'exten':1234,
 		'priority':1,
 		'variables':{
 			'name1':'value1',

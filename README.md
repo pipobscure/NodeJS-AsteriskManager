@@ -49,6 +49,7 @@ So this is basically a different piece of work, but since there is a shared DNA 
  * [Asp3ctus](https://github.com/Asp3ctus)
  * [Christian Gutierrez](https://github.com/chesstrian)
  * [bchavet](https://github.com/bchavet)
+ * [Igor Escobar](<https://github.com/igorescobar)
 
 ## License
 
@@ -56,10 +57,11 @@ MIT License
 -----------
 
 Copyright (C) 2012 by
-  Philipp Dunkel <https://github.com/phidelta>
+  Philipp Dunkel <https://github.com/pipobscure>
   Tekay <https://github.com/Tekay>
   abroweb <https://github.com/abroweb>
   Kofi Hagan <https://github.com/kofibentum>
+  Igor Escobar <https://github.com/igorescobar>
 
 Based on a work Copyright (C) 2010 Brian White <mscdex@gmail.com>, but radically altered thereafter so as to constitute a new work.
 

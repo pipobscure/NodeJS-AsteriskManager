@@ -1,8 +1,8 @@
 {
-  "name":"asterisk-manager",
-  "author":"Philipp Dunkel <philipp.dunkel@gmail.com>",
-  "version":"0.1.6",
-  "description":"A node.js module for interacting with the Asterisk Manager API.",
+  "name": "asterisk-manager",
+  "author": "Philipp Dunkel <philipp.dunkel@gmail.com>",
+  "version": "0.1.7",
+  "description": "A node.js module for interacting with the Asterisk Manager API.",
   "keywords": ["asterisk", "voip"],
   "main": "index.js"
 }

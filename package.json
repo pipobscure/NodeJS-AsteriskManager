@@ -4,5 +4,9 @@
   "version": "0.1.7",
   "description": "A node.js module for interacting with the Asterisk Manager API.",
   "keywords": ["asterisk", "voip"],
-  "main": "index.js"
+  "main": "index.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/pipobscure/NodeJS-AsteriskManager.git"
+  }
 }

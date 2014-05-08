@@ -1,12 +1,15 @@
 {
-  "name": "asterisk-manager",
+  "name":"asterisk-manager",
   "author": "Philipp Dunkel <philipp.dunkel@gmail.com>",
-  "version": "0.1.7",
-  "description": "A node.js module for interacting with the Asterisk Manager API.",
+  "maintainers": [
+    {
+      "name": "Igor Escobar",
+      "email": "blog@igorescobar.com",
+      "web": "https://github.com/igorescobar"
+    }
+  ],
+  "version":"0.1.6",
+  "description":"A node.js module for interacting with the Asterisk Manager API.",
   "keywords": ["asterisk", "voip"],
-  "main": "index.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/pipobscure/NodeJS-AsteriskManager.git"
-  }
+  "main": "index.js"
 }

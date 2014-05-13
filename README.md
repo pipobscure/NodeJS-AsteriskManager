@@ -9,7 +9,7 @@ So this is basically a different piece of work, but since there is a shared DNA 
         $ npm install asterisk-manager
 
 ## Usage
-
+```javascript
         var ami = new require('asterisk-manager')(
                 'port',
                 'host',
@@ -38,7 +38,7 @@ So this is basically a different piece of work, but since there is a shared DNA 
 			'name2':'value2'
 		}
 	}, function(err, res) {});
-
+```
 ## Contributors
 
  * [Philipp Dunkel](https://github.com/phidelta)

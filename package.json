@@ -8,7 +8,7 @@
       "web": "https://github.com/igorescobar"
     }
   ],
-  "version":"0.1.6",
+  "version":"0.1.9",
   "description":"A node.js module for interacting with the Asterisk Manager API.",
   "keywords": ["asterisk", "voip"],
   "main": "index.js",

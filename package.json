@@ -10,7 +10,7 @@
   ],
   "version":"0.1.10",
   "description":"A node.js module for interacting with the Asterisk Manager API.",
-  "keywords": ["asterisk", "voip"],
+  "keywords": ["asterisk", "voip", "ami", "asterisk-manager"],
   "main": "index.js",
   "repository" : {
     "type" : "git",

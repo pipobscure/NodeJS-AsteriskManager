@@ -33,6 +33,9 @@ ami.on('managerevent', function(evt) {});
 ami.on('hangup', function(evt) {});
 ami.on('confbridgejoin', function(evt) {});
 
+// Listen for Action responses.
+ami.on('response', function(evt) {});
+
 // Perform an AMI Action. A list of actions can be found at
 // https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+AMI+Actions
 ami.action({

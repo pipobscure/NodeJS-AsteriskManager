@@ -41,7 +41,7 @@ ami.action({
   'context':'default',
   'exten':1234,
   'priority':1,
-  'variables':{
+  'variable':{
     'name1':'value1',
     'name2':'value2'
   }

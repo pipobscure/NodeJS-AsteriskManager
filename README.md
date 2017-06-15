@@ -52,8 +52,8 @@ ami.action({
 ```
 ## Contributors
 
- * [Philipp Dunkel](https://github.com/phidelta)
- * [Igor Escobar](<https://github.com/igorescobar)
+ * [Philipp Dunkel](https://github.com/pipobscure)
+ * [Igor Escobar](https://github.com/igorescobar)
  * [Tekay](https://github.com/Tekay)
  * [Kofi Hagan](https://github.com/kofibentum)
  * [Hugo Chinchilla Carbonell](https://github.com/hugochinchilla)
@@ -62,19 +62,26 @@ ami.action({
  * [Christian Gutierrez](https://github.com/chesstrian)
  * [bchavet](https://github.com/bchavet)
  * [Joserwan](https://github.com/joserwan)
+ * [Joseph Garrone](https://github.com/garronej)
 
 ## License
 
 MIT License
 -----------
 
-Copyright (C) 2012 by
+Copyright (C) 2012 - 2017 by
   Philipp Dunkel <https://github.com/pipobscure>
-  Tekay <https://github.com/Tekay>
   abroweb <https://github.com/abroweb>
-  Kofi Hagan <https://github.com/kofibentum>
   Igor Escobar <https://github.com/igorescobar>
-  Joserwan https://github.com/joserwan
+  Tekay <https://github.com/Tekay>
+  Kofi Hagan <https://github.com/kofibentum>
+  Hugo Chinchilla Carbonell <https://github.com/hugochinchilla>
+  Nick Mooney <https://github.com/Gnewt>
+  Asp3ctus <https://github.com/Asp3ctus>
+  Christian Gutierrez <https://github.com/chesstrian>
+  bchavet <https://github.com/bchavet>
+  Joserwan <https://github.com/joserwan>
+  Joseph Garrone <https://github.com/garronej>
 
 Based on a work Copyright (C) 2010 Brian White <mscdex@gmail.com>, but radically altered thereafter so as to constitute a new work.
 

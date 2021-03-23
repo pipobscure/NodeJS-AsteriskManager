@@ -1,4 +1,5 @@
-# Asterisk Manager API [![Total views](https://sourcegraph.com/api/repos/github.com/pipobscure/NodeJS-AsteriskManager/.counters/views.png)](https://sourcegraph.com/github.com/pipobscure/NodeJS-AsteriskManager)
+# Asterisk Manager API [![HitCount](http://hits.dwyl.com/pipobscure/NodeJS-AsteriskManager.svg)](http://hits.dwyl.com/pipobscure/NodeJS-AsteriskManager)
+
 [![NPM](https://nodei.co/npm/asterisk-manager.png)](https://nodei.co/npm/asterisk-manager/)  
 
 For a project of mine I needed a low level interface to the Asterisk Manager API. I looked around and found https://github.com/mscdex/node-asterisk . While it was a good starting point, it had too many abstractions for my taste. Which is why I based my version on it an then radically refactored it. In the end there now is very little in common with it.
